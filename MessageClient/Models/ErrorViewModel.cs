@@ -1,3 +1,4 @@
+#nullable enable
 namespace MessageClient.Models;
 
 public class ErrorViewModel
