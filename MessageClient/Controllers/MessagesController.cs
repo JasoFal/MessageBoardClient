@@ -11,6 +11,10 @@ public class MessagesController : Controller
     return View(messages);
   }
 
-  
+  public IActionResult Details(int id)
+  {
+    Message message = Message.GetDetails(id);
+    return View(message);
+  }
 }
 
