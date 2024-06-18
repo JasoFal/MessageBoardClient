@@ -1,0 +1,16 @@
+@{
+  ViewData["Title"] = "Messages";
+}
+
+<h1>All Messages</h1>
+<ul>
+@foreach (Message message in Model)
+{
+  <li><strong>@message.PostTime</strong> : <a href="/Messages/Details/@(message.MessageId)">@message.Content</a> - @message.user_name</li>
+}
+</ul>
+
+<p>@Html.ActionLink("Post a new message", "Create")</p>
+
+
+
