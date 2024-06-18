@@ -34,5 +34,11 @@ namespace MessageClient.Models
       Message message = JsonConvert.DeserializeObject<Message>(jsonResponse.ToString());
       return message;
     }
+
+    public static void Post(Message message)
+    {
+      string jsonMessage = JsonConvert.SerializeObject(message);
+      ApiHelper.Post(jsonMessage);
+    }
   }
 }
