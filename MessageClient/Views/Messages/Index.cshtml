@@ -6,6 +6,7 @@
 <ul>
 @foreach (Message message in Model)
 {
+  <li>@message.Group</li>
   <li><strong>@message.PostTime</strong> : <a href="/Messages/Details/@(message.MessageId)">@message.Content</a> - @message.user_name</li>
 }
 </ul>
