@@ -1,0 +1,14 @@
+@{
+  ViewData["Title"] = $"Details for {@Model.PostTime}";
+}
+
+<h2>Message:</h2>
+
+<p>@Model.PostTime</p>
+<p>@Model.Group</p>
+<p>@Model.user_name</p>
+<p>@Model.Content</p>
+
+<p>@Html.ActionLink("Edit details", "Edit", new { id = @Model.MessageId })</p>
+<p>@Html.ActionLink("Delete message", "Delete", new { id = @Model.MessageId })</p>
+<p>@Html.ActionLink("Return to all messages", "Index")</p>
