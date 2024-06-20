@@ -1,0 +1,24 @@
+@{
+  ViewData["Title"] = "New Message";
+}
+
+@model MessageClient.Models.Message
+
+<h4>Post a new message</h4>
+
+@using (Html.BeginForm())
+{ 
+  @Html.LabelFor(model => model.Group)
+  @Html.TextBoxFor(model => model.Group)
+  <br/>
+  @Html.LabelFor(model => model.user_name)
+  @Html.TextBoxFor(model => model.user_name)
+  <br/>
+  @Html.LabelFor(model => model.Content)
+  @Html.TextBoxFor(model => model.Content)
+  <br/>
+  <input type="submit" value="Post Message" class="btn btn-primary"/>
+}
+
+<br/>
+<p>@Html.ActionLink("Back to messages", "Index")</p>
