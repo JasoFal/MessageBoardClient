@@ -41,5 +41,12 @@ public class MessagesController : Controller
     Message.Put(message);
     return RedirectToAction("Details", new { id = Message.MessageId});
   }
+
+  [HttpPost, ActionName("Delete")]
+  public ActionResult DeleteConfirmed(int id)
+  {
+    Message.Delete(id);
+    return RedirectToAction("Index");
+  }
 }
 
