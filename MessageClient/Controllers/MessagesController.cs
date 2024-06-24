@@ -28,5 +28,18 @@ public class MessagesController : Controller
     Message.Post(message);
     return RedirectToAction("Index");
   }
+
+  public ActionResult Edit(int id)
+  {
+    Message message = Message.GetDetails(id);
+    return View(message);
+  }
+
+  [HttpPost]
+  public ActionResult Edit(Message message)
+  {
+    Message.Put(message);
+    return RedirectToAction("Details", new { id = Message.MessageId});
+  }
 }
 
