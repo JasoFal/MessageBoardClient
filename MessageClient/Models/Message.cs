@@ -46,5 +46,10 @@ namespace MessageClient.Models
       string jsonMessage = JsonConvert.SerializeObject(message);
       ApiHelper.Put(message.MessageId, jsonMessage);
     }
+
+    public static void Delete(int id)
+    {
+      ApiHelper.Delete(id);
+    }
   }
 }
