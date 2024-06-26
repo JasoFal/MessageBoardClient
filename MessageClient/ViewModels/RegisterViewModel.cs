@@ -9,7 +9,7 @@ namespace MessageClient.ViewModels
     [Display(Name = "Email Address")]
     public string Email { get; set; }
 
-    [Required]
+    [Required, MaxLength(50)]
     [Display(Name = "User Name")]
     public string UserName { get; set; }
     

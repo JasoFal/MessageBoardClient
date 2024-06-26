@@ -7,7 +7,7 @@
 @foreach (Message message in Model)
 {
   <li>@message.Group</li>
-  <li><strong>@message.PostTime</strong> : <a href="/Messages/Details/@(message.MessageId)">@message.Content</a> - @message.user_name</li>
+  <li>@message.PostTime : <a href="/Messages/Details/@(message.MessageId)">@message.Content</a> - <strong>@message.user_name</strong></li>
 }
 </ul>
 

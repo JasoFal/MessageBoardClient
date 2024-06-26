@@ -39,7 +39,13 @@ public class MessagesController : Controller
   public ActionResult Edit(Message message)
   {
     Message.Put(message);
-    return RedirectToAction("Details", new { id = Message.MessageId});
+    return RedirectToAction("Details", new { id = message.MessageId });
+  }
+
+  public ActionResult Delete(int id)
+  {
+    Message message = Message.GetDetails(id);
+    return View(message);
   }
 
   [HttpPost, ActionName("Delete")]
