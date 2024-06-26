@@ -1,7 +1,17 @@
+using MessageClient.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<MessageClientContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -18,6 +28,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllerRoute(
