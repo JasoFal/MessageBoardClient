@@ -30,19 +30,19 @@ namespace MessageClient.Models
       await client.PostAsync(request);
     }
 
-    public static async void Put(int id, string newMessage)
+    public static async void Put(int id, string newMessage, string userName)
     {
       RestClient client = new RestClient("http://localhost:5000/");
-      RestRequest request = new RestRequest($"api/messages/{id}", Method.Put);
+      RestRequest request = new RestRequest($"api/messages/{id}?user_name={userName}", Method.Put);
       request.AddHeader("Content-Type", "application/json");
       request.AddJsonBody(newMessage);
       await client.PutAsync(request);
     }
 
-    public static async void Delete(int id)
+    public static async void Delete(int id, string userName)
     {
       RestClient client = new RestClient("http://localhost:5000/");
-      RestRequest request = new RestRequest($"api/messages/{id}", Method.Delete);
+      RestRequest request = new RestRequest($"api/messages/{id}?user_name={userName}", Method.Delete);
       request.AddHeader("Content-Type", "application/json");
       await client.DeleteAsync(request);
     }

@@ -41,15 +41,15 @@ namespace MessageClient.Models
       ApiHelper.Post(jsonMessage);
     }
 
-    public static void Put(Message message)
+    public static void Put(Message message, string userName)
     {
       string jsonMessage = JsonConvert.SerializeObject(message);
-      ApiHelper.Put(message.MessageId, jsonMessage);
+      ApiHelper.Put(message.MessageId, jsonMessage, userName);
     }
 
-    public static void Delete(int id)
+    public static void Delete(int id, string userName)
     {
-      ApiHelper.Delete(id);
+      ApiHelper.Delete(id, userName);
     }
   }
 }
