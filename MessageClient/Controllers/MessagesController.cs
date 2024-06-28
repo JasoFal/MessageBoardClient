@@ -25,8 +25,15 @@ public class MessagesController : Controller
     return View(messages);
   }
 
-  public IActionResult Details(int id)
+  public async Task<IActionResult> Details(int id)
   {
+
+    string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+    if (currentUser != null)
+    {
+      ViewBag.CurrentUser = currentUser.UserName;
+    }
     Message message = Message.GetDetails(id);
     return View(message);
   }
@@ -41,9 +48,17 @@ public class MessagesController : Controller
   {
     string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-    message.user_name = currentUser.UserName;
-    Message.Post(message);
-    return RedirectToAction("Index");
+    if (currentUser != null)
+    {
+      message.user_name = currentUser.UserName;
+      message.PostTime = DateTime.UtcNow;
+      Message.Post(message);
+      return RedirectToAction("Index");
+    }
+    else
+    {
+      return View(message);
+    }
   }
 
   public ActionResult Edit(int id)
@@ -57,8 +72,15 @@ public class MessagesController : Controller
   {
     string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-    Message.Put(message, currentUser.UserName);
-    return RedirectToAction("Details", new { id = message.MessageId });
+    if (currentUser != null)
+    {
+      Message.Put(message, currentUser.UserName);
+      return RedirectToAction("Details", new { id = message.MessageId });
+    }
+    else
+    {
+      return View(message);
+    }
   }
 
   public ActionResult Delete(int id)
@@ -72,8 +94,15 @@ public class MessagesController : Controller
   {
     string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-    Message.Delete(id, currentUser.UserName);
-    return RedirectToAction("Index");
+    if (currentUser != null)
+    {
+      Message.Delete(id, currentUser.UserName);
+      return RedirectToAction("Index");
+    }
+    else
+    {
+      return View(id);
+    }
   }
 }
 
