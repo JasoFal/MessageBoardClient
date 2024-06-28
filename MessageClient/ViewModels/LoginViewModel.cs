@@ -4,10 +4,9 @@ namespace MessageClient.ViewModels
 {
   public class LoginViewModel
   {
-    [Required]
-    [EmailAddress]
-    [Display(Name = "Email Address")]
-    public string Email { get; set; }
+    [Required, MaxLength(50)]
+    [Display(Name = "User Name")]
+    public string UserName { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
