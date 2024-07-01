@@ -13,5 +13,13 @@
 
 <p>@Html.ActionLink("Post a new message", "Create")</p>
 
-
+@if (@ViewBag.PgNum != 1)
+{
+  @Html.ActionLink("Previous", "IndexPagination", new { pageNumModifier = -1, currentPage = @ViewBag.PgNum})
+}
+<p>@ViewBag.PgNum</p>
+@if (@ViewBag.EmptyList)
+{
+  @Html.ActionLink("Next", "IndexPagination", new { pageNumModifier = 1, currentPage = @ViewBag.PgNum})
+}
 
