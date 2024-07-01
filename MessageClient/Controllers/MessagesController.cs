@@ -19,14 +19,14 @@ public class MessagesController : Controller
     _db = db;
   }
   
-  public IActionResult Index(int currentPageNum = 1)
+  public IActionResult Index(string group = null, string minimumPostDate = null, string maximumPostDate = null, int currentPageNum = 1)
   {
     ViewBag.PgNum = currentPageNum;
     int futurePageNum = currentPageNum + 1;
-    List<Message> futureMessages = Message.GetMessages(futurePageNum);
+    List<Message> futureMessages = Message.GetMessages(group, minimumPostDate, maximumPostDate, futurePageNum);
     bool isEmpty = futureMessages.Any();
     ViewBag.EmptyList = isEmpty;
-    List<Message> messages = Message.GetMessages(Math.Max(currentPageNum, 1));
+    List<Message> messages = Message.GetMessages(group, minimumPostDate, maximumPostDate, Math.Max(currentPageNum, 1));
     return View(messages);
   }
 
@@ -34,6 +34,12 @@ public class MessagesController : Controller
   {
     int newCurrentPageNum = currentPage + pageNumModifier;
     return RedirectToAction("Index", new { currentPageNum = newCurrentPageNum });
+  }
+
+  [HttpPost]
+  public IActionResult IndexSearch(string groupSearch, string minimumPostDateSearch, string maximumPostDateSearch)
+  {
+    return RedirectToAction("Index", new { group = groupSearch, minimumPostDate = minimumPostDateSearch, maximumPostDate = maximumPostDateSearch });
   }
 
   public async Task<IActionResult> Details(int id)
@@ -115,4 +121,3 @@ public class MessagesController : Controller
     }
   }
 }
-

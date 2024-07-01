@@ -5,10 +5,10 @@ namespace MessageClient.Models
 {
   public class ApiHelper
   {
-    public static async Task<string> GetAll(int currentPageNum)
+    public static async Task<string> GetAll(string group, string minimumPostDate, string maximumPostDate, int currentPageNum)
     {
       RestClient client = new RestClient("http://localhost:5000/");
-      RestRequest request = new RestRequest($"api/messages?pageNumber={currentPageNum}", Method.Get);
+      RestRequest request = new RestRequest($"api/messages?pageNumber={currentPageNum}&group={group}&minimumpostdate={minimumPostDate}&maximumpostdate={maximumPostDate}", Method.Get);
       RestResponse response = await client.GetAsync(request);
       return response.Content;
     }
