@@ -3,6 +3,18 @@
 }
 
 <h1>All Messages</h1>
+
+<h4>Search</h4>
+@using (Html.BeginForm("IndexSearch"))
+{
+  <p>Group</p>
+  @Html.TextBox("group")
+  <p>Min Time</p>
+  @Html.TextBox("minimumPostDate")
+  <p>Max Time</p>
+  @Html.TextBox("maximumPostDate")
+  <input type="submit" value="Search" class="btn btn-primary"/>
+}
 <ul>
 @foreach (Message message in Model)
 {
