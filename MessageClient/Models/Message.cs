@@ -14,9 +14,9 @@ namespace MessageClient.Models
     public DateTime PostTime { get; set; }
     public string user_name { get; set; }
 
-    public static List<Message> GetMessages()
+    public static List<Message> GetMessages(int currentPageNum = 1)
     {
-      Task<string> apiCallTask = ApiHelper.GetAll();
+      Task<string> apiCallTask = ApiHelper.GetAll(currentPageNum);
       string result = apiCallTask.Result;
 
       JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
