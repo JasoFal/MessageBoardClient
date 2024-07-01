@@ -19,15 +19,25 @@ public class MessagesController : Controller
     _db = db;
   }
   
-  public IActionResult Index()
+  public IActionResult Index(int currentPageNum = 1)
   {
-    List<Message> messages = Message.GetMessages();
+    ViewBag.PgNum = currentPageNum;
+    int futurePageNum = currentPageNum + 1;
+    List<Message> futureMessages = Message.GetMessages(futurePageNum);
+    bool isEmpty = futureMessages.Any();
+    ViewBag.EmptyList = isEmpty;
+    List<Message> messages = Message.GetMessages(Math.Max(currentPageNum, 1));
     return View(messages);
+  }
+
+  public IActionResult IndexPagination(int pageNumModifier, int currentPage)
+  {
+    int newCurrentPageNum = currentPage + pageNumModifier;
+    return RedirectToAction("Index", new { currentPageNum = newCurrentPageNum });
   }
 
   public async Task<IActionResult> Details(int id)
   {
-
     string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
     if (currentUser != null)
